@@ -1,3 +1,5 @@
+// ignore_for_file: unused_import, duplicate_import
+
 import 'package:flutter_projeto/configuracao.dart';
 import 'package:flutter_projeto/tela_login/login.dart';
 import 'package:flutter_projeto/tela_cadastro/tela_cadastro.dart';
