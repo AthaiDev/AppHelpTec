@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "149585719276",
+    "project_id": "helptec2023",
+    "storage_bucket": "helptec2023.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:149585719276:android:8206934611a08da00f9ac9",
+        "android_client_info": {
+          "package_name": "com.example.flutter_projeto"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBz72CljeA0GqWYWa4IEaDR7SeBoC3iWTs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
