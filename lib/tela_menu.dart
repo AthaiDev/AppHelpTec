@@ -1,14 +1,13 @@
 // ignore_for_file: unused_import, duplicate_import
 
-import 'package:flutter_projeto/configuracao.dart';
-import 'package:flutter_projeto/tela_login/login.dart';
-import 'package:flutter_projeto/tela_cadastro/tela_cadastro.dart';
+import '../configuracao.dart';
+import '../tela_login/login.dart';
+import '../tela_cadastro/tela_cadastro.dart';
 import 'package:flutter/material.dart';
-export 'package:flutter_projeto/tela_menu.dart';
-import 'package:flutter_projeto/configuracao.dart';
+import '../controller/login_controller.dart';
 
-class menu extends StatelessWidget {
-  const menu({Key? key}) : super(key: key);
+class Menu extends StatelessWidget {
+  const Menu({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +58,8 @@ class menu extends StatelessWidget {
               title: Text('Logout'),
               subtitle: Text('Sair'),
               onTap: () {
-                Navigator.of(context).pushReplacementNamed('/');
+                 LoginController().logout();
+                        Navigator.pushReplacementNamed(context, 'login');
               }, 
             ),
           ],

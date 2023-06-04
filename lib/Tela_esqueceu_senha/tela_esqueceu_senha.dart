@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-export 'package:flutter_projeto/tela_esqueceu_senha/tela_esqueceu_senha.dart';
 
-class esqueciMinhaSenha extends StatefulWidget {
+class EsqueciMinhaSenha extends StatefulWidget {
   @override
-  _ForgotPasswordScreenState createState() => _ForgotPasswordScreenState();
+  _EsqueciMinhaSenhaState createState() => _EsqueciMinhaSenhaState();
 }
 
-class _ForgotPasswordScreenState extends State<esqueciMinhaSenha> {
+class _EsqueciMinhaSenhaState extends State<EsqueciMinhaSenha> {
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
 
@@ -39,28 +38,29 @@ class _ForgotPasswordScreenState extends State<esqueciMinhaSenha> {
               ),
               SizedBox(height: 16.0),
               ElevatedButton(
-  onPressed: () {
-    if (_formKey.currentState!.validate()) {
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return SimpleDialog(
-            title: Text('Email enviado com sucesso'),
-            children: <Widget>[
-              TextButton(
-                child: Text('Fechar'),
                 onPressed: () {
-                  Navigator.of(context).pushReplacementNamed('/');
+                  if (_formKey.currentState!.validate()) {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return SimpleDialog(
+                          title: Text('Email enviado com sucesso'),
+                          children: <Widget>[
+                            TextButton(
+                              child: Text('Fechar'),
+                              onPressed: () {
+                                Navigator.pop(context);
+                                Navigator.pop(context);
+                              },
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  }
                 },
+                child: Text('Enviar email de redefinição'),
               ),
-            ],
-          );
-        },
-      );
-    }
-  },
-  child: Text('Enviar email de redefinição'),
-),
             ],
           ),
         ),

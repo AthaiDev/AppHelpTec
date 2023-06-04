@@ -1,11 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_projeto/tela_esqueceu_senha/tela_esqueceu_senha.dart';
-import 'package:flutter_projeto/tela_cadastro/tela_cadastro.dart';
-import 'package:flutter_projeto/tela_menu.dart';
-import 'package:flutter_projeto/tela_material.dart';
+import 'package:flutter_projeto/Tela_esqueceu_senha/tela_esqueceu_senha.dart';
+import '../tela_esqueceu_senha/tela_esqueceu_senha.dart';
+import '../tela_cadastro/tela_cadastro.dart';
+import '../tela_menu.dart';
+import '../tela_material.dart';
+import '../controller/login_controller.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  var txtEmail = TextEditingController();
+  var txtSenha = TextEditingController();
+  var txtEmailEsqueceuSenha = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,15 +34,16 @@ class LoginPage extends StatelessWidget {
           children: [
             SizedBox(
               child: Image.asset(
-                'lib/image/logo.png',
+                './image/logo.png',
                 width: 200,
                 height: 150,
               ),
             ),
             SizedBox(height: 30),
             TextField(
+              controller: txtEmail,
               decoration: InputDecoration(
-                enabledBorder: OutlineInputBorder(
+                  enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.blue, width: 2.0),
                   ),
                   focusedBorder: OutlineInputBorder(
@@ -40,6 +57,7 @@ class LoginPage extends StatelessWidget {
             ),
             SizedBox(height: 15),
             TextField(
+              controller: txtSenha,
               obscureText: true,
               decoration: InputDecoration(
                   enabledBorder: OutlineInputBorder(
@@ -54,13 +72,15 @@ class LoginPage extends StatelessWidget {
                   prefixIcon: Icon(Icons.private_connectivity),
                   border: OutlineInputBorder()),
             ),
+
+            //>>>>>>BOTÃO DE ESQUECEU A SENHA <<<<<<
             Padding(
               padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
               child: Align(
                 alignment: Alignment.bottomRight,
                 child: TextButton(
                   onPressed: () {
-                    Navigator.of(context).push(_esqueciMinhaSenha());
+                    Navigator.popAndPushNamed(context, 'esqueci');
                   },
                   child: const Text(
                     'Esqueci minha senha!',
@@ -71,13 +91,19 @@ class LoginPage extends StatelessWidget {
                 ),
               ),
             ),
+
+            //>>>>>> BOTÃO ENTRAR <<<<<<
             const SizedBox(height: 20),
             SizedBox(
               width: 170,
               height: 50,
               child: ElevatedButton(
                 onPressed: () {
-                  Navigator.of(context).push(_menu());
+                  LoginController().login(
+                    context,
+                    txtEmail.text,
+                    txtSenha.text,
+                  );
                 },
                 child: Text('Entrar'),
                 style: ElevatedButton.styleFrom(
@@ -90,10 +116,12 @@ class LoginPage extends StatelessWidget {
                 ),
               ),
             ),
+
+            // >>>>>> BOTÃO CADASTRAR <<<<<<
             const SizedBox(height: 30),
             TextButton(
               onPressed: () {
-                Navigator.of(context).push(_cadastro());
+                Navigator.pushNamed(context, 'cadastrar');
               },
               child: const Text(
                 'Criar Conta',
@@ -103,6 +131,8 @@ class LoginPage extends StatelessWidget {
                 ),
               ),
             ),
+
+            // >>>>>>BOTÕES "CONECTAR COM" <<<<<<
             const SizedBox(height: 20),
             Text(
               'Conectar com',
@@ -159,9 +189,9 @@ class LoginPage extends StatelessWidget {
   }
 }
 
-Route _cadastro() {
+/*Route _Cadastro() {
   return PageRouteBuilder(
-    pageBuilder: (context, animation, secondaryAnimation) => const cadastro(),
+    pageBuilder: (context, animation, secondaryAnimation) => CadastroPage(),
     transitionsBuilder: (context, animation, secondaryAnimation, child) {
       const begin = Offset(0.0, 1.0);
       const end = Offset.zero;
@@ -175,9 +205,9 @@ Route _cadastro() {
       );
     },
   );
-}
+}*/
 
-Route _esqueciMinhaSenha() {
+/*Route _esqueciMinhaSenha() {
   return PageRouteBuilder(
     pageBuilder: (context, animation, secondaryAnimation) =>
         esqueciMinhaSenha(),
@@ -230,4 +260,4 @@ Route _material() {
       );
     },
   );
-}
+}*/

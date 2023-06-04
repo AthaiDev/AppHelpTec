@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-export 'package:flutter_projeto/tela_cadastro/tela_cadastro.dart';
+export '../tela_cadastro/tela_cadastro.dart';
+import '../controller/login_controller.dart';
 
 class Material extends StatelessWidget {
   const Material({Key? key}) : super(key: key);

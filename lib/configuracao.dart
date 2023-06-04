@@ -1,6 +1,6 @@
-import 'package:flutter_projeto/tela_login/login.dart';
 import 'package:flutter/material.dart';
-export 'package:flutter_projeto/configuracao.dart';
+import 'Tela_login/login.dart';
+
 
 class Configuracao extends StatelessWidget {
   const Configuracao({Key? key}) : super(key: key);

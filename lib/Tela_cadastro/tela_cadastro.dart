@@ -1,9 +1,22 @@
-import 'package:flutter_projeto/tela_login/login.dart';
 import 'package:flutter/material.dart';
-export 'package:flutter_projeto/tela_cadastro/tela_cadastro.dart';
+import '../controller/login_controller.dart';
 
-class cadastro extends StatelessWidget {
-  const cadastro({Key? key}) : super(key: key);
+class Cadastro extends StatefulWidget {
+  const Cadastro({super.key});
+  
+  @override
+  State<Cadastro> createState() => _CadastroState();
+}
+
+class _CadastroState extends State<Cadastro> {
+  var txtNome = TextEditingController();
+  var txtEmail = TextEditingController();
+  var txtSenha = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +34,8 @@ class cadastro extends StatelessWidget {
                 height: 200,
               ),
             ),
-             TextFormField(
+             TextField(
+              controller: txtEmail,
                 decoration: const InputDecoration(
                   fillColor: Color.fromARGB(255, 138, 141, 144),
                   filled: true,
@@ -37,7 +51,8 @@ class cadastro extends StatelessWidget {
                 ),
               ),
             const SizedBox(height: 20),
-            TextFormField(
+            TextField(
+                controller: txtNome,
                 decoration: const InputDecoration(
                   fillColor: Color.fromARGB(255, 138, 141, 144),
                   filled: true,
@@ -53,7 +68,7 @@ class cadastro extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 20),
-              TextFormField(
+              TextField(
                 decoration: const InputDecoration(
                   fillColor: Color.fromARGB(255, 138, 141, 144),
                   filled: true,
@@ -69,7 +84,8 @@ class cadastro extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 10),
-              TextFormField(
+              TextField(
+                controller: txtSenha,
                 decoration: const InputDecoration(
                   fillColor: Color.fromARGB(255, 138, 141, 144),
                   filled: true,
@@ -90,8 +106,13 @@ class cadastro extends StatelessWidget {
               height: 70,
             child: ElevatedButton(
               onPressed: () {
-                 Navigator.of(context).pushReplacementNamed('/');
-              },
+                    LoginController().criarConta(
+                      context,
+                      txtNome.text,
+                      txtEmail.text,
+                      txtSenha.text,
+                    );
+                  },
               child: const Text(
                 'Cadastrar',
                 style: TextStyle(
@@ -110,7 +131,7 @@ class cadastro extends StatelessWidget {
   }
 }
 
-Route login() {
+/*Route login() {
   return PageRouteBuilder(
     pageBuilder: (context, animation, secondaryAnimation) => const LoginPage(),
     transitionsBuilder: (context, animation, secondaryAnimation, child) {
@@ -126,4 +147,4 @@ Route login() {
       );
     },
   );
-}
+}*/

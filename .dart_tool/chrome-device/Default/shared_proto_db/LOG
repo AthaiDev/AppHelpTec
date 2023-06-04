@@ -1,6 +1,10 @@
-2023/05/30-20:16:55.664 5474 Reusing MANIFEST C:\Users\athai\AppData\Local\Temp\flutter_tools.2f6ffc8\flutter_tools_chrome_device.f24066fc\Default\shared_proto_db/MANIFEST-000001
-2023/05/30-20:16:55.706 5474 Recovering log #10
-2023/05/30-20:16:55.708 5474 Reusing old log C:\Users\athai\AppData\Local\Temp\flutter_tools.2f6ffc8\flutter_tools_chrome_device.f24066fc\Default\shared_proto_db/000010.log 
-2023/05/30-20:16:55.709 5474 Delete type=0 #3
-2023/05/30-20:16:55.709 5474 Delete type=0 #4
-2023/05/30-20:16:55.709 5474 Delete type=0 #7
+2023/06/01-19:21:00.716 3fa0 Reusing MANIFEST C:\Users\athai\AppData\Local\Temp\flutter_tools.7a2ad9ea\flutter_tools_chrome_device.4ad6196e\Default\shared_proto_db/MANIFEST-000001
+2023/06/01-19:21:00.721 3fa0 Recovering log #13
+2023/06/01-19:21:00.724 3fa0 Reusing old log C:\Users\athai\AppData\Local\Temp\flutter_tools.7a2ad9ea\flutter_tools_chrome_device.4ad6196e\Default\shared_proto_db/000013.log 
+2023/06/01-19:21:00.725 3fa0 Delete type=0 #3
+2023/06/01-19:21:00.725 3fa0 Delete type=0 #4
+2023/06/01-19:21:00.725 3fa0 Delete type=0 #7
+2023/06/01-19:21:00.725 3fa0 Delete type=0 #10
+2023/06/01-19:21:33.443 4364 Level-0 table #17: started
+2023/06/01-19:21:33.449 4364 Level-0 table #17: 137983 bytes OK
+2023/06/01-19:21:33.452 4364 Delete type=0 #13
