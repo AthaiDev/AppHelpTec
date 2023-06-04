@@ -1,1 +1,1 @@
-Nathan + Athaide amor eterno
+Nathan
