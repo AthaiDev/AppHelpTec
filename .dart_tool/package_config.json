@@ -56,6 +56,12 @@
       "languageVersion": "2.18"
     },
     {
+      "name": "cupertino_icons",
+      "rootUri": "file:///C:/Users/athai/AppData/Local/Pub/Cache/hosted/pub.dev/cupertino_icons-1.0.5",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "device_frame",
       "rootUri": "file:///C:/Users/athai/AppData/Local/Pub/Cache/hosted/pub.dev/device_frame-1.1.0",
       "packageUri": "lib/",
@@ -140,6 +146,12 @@
       "languageVersion": "3.0"
     },
     {
+      "name": "flutter_spinkit",
+      "rootUri": "file:///C:/Users/athai/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_spinkit-5.2.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "flutter_test",
       "rootUri": "file:///C:/flutter/sdk/packages/flutter_test",
       "packageUri": "lib/",
@@ -208,6 +220,12 @@
     {
       "name": "nested",
       "rootUri": "file:///C:/Users/athai/AppData/Local/Pub/Cache/hosted/pub.dev/nested-1.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "page_transition",
+      "rootUri": "file:///C:/Users/athai/AppData/Local/Pub/Cache/hosted/pub.dev/page_transition-2.0.9",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -374,7 +392,7 @@
       "languageVersion": "2.19"
     }
   ],
-  "generated": "2023-06-01T22:38:21.261855Z",
+  "generated": "2023-06-06T19:21:53.648074Z",
   "generator": "pub",
   "generatorVersion": "3.0.0-366.0.dev"
 }

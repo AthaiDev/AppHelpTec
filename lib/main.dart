@@ -2,6 +2,7 @@
 import 'package:device_preview/device_preview.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_projeto/Tela_carregamento.dart';
 import 'package:flutter_projeto/Tela_esqueceu_senha/tela_esqueceu_senha.dart';
 
 import 'firebase_options.dart';
@@ -20,8 +21,9 @@ Future<void> main() async {
       builder: (context) => MaterialApp(
         useInheritedMediaQuery: true,
         debugShowCheckedModeBanner: false,
-        initialRoute: 'login',
+        initialRoute: 'carregar',
         routes: {
+          'carregar': (context) => Carregamento(),
           'cadastrar': (context) => Cadastro(),
           'login': (context) => LoginPage(),
           'principal': (context) => Menu(),

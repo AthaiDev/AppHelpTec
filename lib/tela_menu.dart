@@ -1,5 +1,5 @@
 // ignore_for_file: unused_import, duplicate_import
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import '../configuracao.dart';
 import '../tela_login/login.dart';
 import '../tela_cadastro/tela_cadastro.dart';
@@ -19,13 +19,29 @@ class Menu extends StatelessWidget {
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
-            UserAccountsDrawerHeader(
-              currentAccountPicture: CircleAvatar(
-                backgroundImage: AssetImage('./lib/image/oliver.jpeg'),
-                radius: 30.0,
-              ),
-              accountName: Text('Oliveira'),
-              accountEmail: Text('oliveira@outlook.com.br'),
+            FutureBuilder<String>(
+              future: LoginController().usuarioLogado(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.done) {
+                return Directionality(
+                    textDirection: TextDirection.ltr,
+                    child: TextButton.icon(
+                      style: TextButton.styleFrom(
+                        foregroundColor: Colors.black,
+                        textStyle: TextStyle(fontSize: 12),
+                      ),
+                      onPressed: () {
+                        LoginController().logout();
+                        Navigator.pushReplacementNamed(context, 'login');
+                      },
+                      icon: Icon(Icons.exit_to_app, size: 14),
+                      label: Text(snapshot.data.toString()),
+                    )
+                );
+                }
+
+                return Text('');
+              },
             ),
             ListTile(
               leading: Icon(Icons.home),
@@ -58,8 +74,8 @@ class Menu extends StatelessWidget {
               title: Text('Logout'),
               subtitle: Text('Sair'),
               onTap: () {
-                 LoginController().logout();
-                        Navigator.pushReplacementNamed(context, 'login');
+                LoginController().logout();
+                Navigator.pushReplacementNamed(context, 'login');
               }, 
             ),
           ],

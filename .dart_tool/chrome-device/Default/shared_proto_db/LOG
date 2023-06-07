@@ -1,10 +1,13 @@
-2023/06/01-19:21:00.716 3fa0 Reusing MANIFEST C:\Users\athai\AppData\Local\Temp\flutter_tools.7a2ad9ea\flutter_tools_chrome_device.4ad6196e\Default\shared_proto_db/MANIFEST-000001
-2023/06/01-19:21:00.721 3fa0 Recovering log #13
-2023/06/01-19:21:00.724 3fa0 Reusing old log C:\Users\athai\AppData\Local\Temp\flutter_tools.7a2ad9ea\flutter_tools_chrome_device.4ad6196e\Default\shared_proto_db/000013.log 
-2023/06/01-19:21:00.725 3fa0 Delete type=0 #3
-2023/06/01-19:21:00.725 3fa0 Delete type=0 #4
-2023/06/01-19:21:00.725 3fa0 Delete type=0 #7
-2023/06/01-19:21:00.725 3fa0 Delete type=0 #10
-2023/06/01-19:21:33.443 4364 Level-0 table #17: started
-2023/06/01-19:21:33.449 4364 Level-0 table #17: 137983 bytes OK
-2023/06/01-19:21:33.452 4364 Delete type=0 #13
+2023/06/06-19:45:36.785 51ac Reusing MANIFEST C:\Users\athai\AppData\Local\Temp\flutter_tools.8b08d997\flutter_tools_chrome_device.9c3f5d8d\Default\shared_proto_db/MANIFEST-000001
+2023/06/06-19:45:36.789 51ac Recovering log #19
+2023/06/06-19:45:36.790 51ac Reusing old log C:\Users\athai\AppData\Local\Temp\flutter_tools.8b08d997\flutter_tools_chrome_device.9c3f5d8d\Default\shared_proto_db/000019.log 
+2023/06/06-19:45:36.790 51ac Delete type=0 #3
+2023/06/06-19:45:36.790 51ac Delete type=0 #4
+2023/06/06-19:45:36.790 51ac Delete type=0 #7
+2023/06/06-19:45:36.790 51ac Delete type=2 #8
+2023/06/06-19:45:36.790 51ac Delete type=0 #10
+2023/06/06-19:45:36.790 51ac Delete type=2 #11
+2023/06/06-19:45:36.790 51ac Delete type=0 #13
+2023/06/06-19:45:36.790 51ac Delete type=2 #14
+2023/06/06-19:45:36.790 51ac Delete type=0 #16
+2023/06/06-19:45:36.790 51ac Delete type=2 #17

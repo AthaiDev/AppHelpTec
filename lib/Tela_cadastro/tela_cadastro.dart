@@ -12,6 +12,7 @@ class _CadastroState extends State<Cadastro> {
   var txtNome = TextEditingController();
   var txtEmail = TextEditingController();
   var txtSenha = TextEditingController();
+  var txtTelefone = TextEditingController();
 
   @override
   void initState() {
@@ -22,11 +23,11 @@ class _CadastroState extends State<Cadastro> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        padding: const EdgeInsets.all(20),
+        
+        padding: EdgeInsets.fromLTRB(40, 0, 40, 10),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(height:10),
             SizedBox(
               child: Image.asset(
                   './lib/image/cadastro.png',
@@ -34,76 +35,84 @@ class _CadastroState extends State<Cadastro> {
                 height: 200,
               ),
             ),
+            SizedBox(child: const Text(
+                  'Cadastre-se',
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Color(0xFF0091ff),
+                    fontWeight: FontWeight.normal, // adicionado
+                  ),
+                ),
+                ),
+            SizedBox(height: 20),
              TextField(
               controller: txtEmail,
-                decoration: const InputDecoration(
-                  fillColor: Color.fromARGB(255, 138, 141, 144),
-                  filled: true,
-                  labelText: 'E-mail',
-                  labelStyle: TextStyle(
-                    color: Color.fromARGB(255, 255, 255,
-                        255), // Definindo a cor branca para o label
-                  ),
-                  border: OutlineInputBorder(),
-                ),
-                style: TextStyle(
-                  color: Colors.white,
-                ),
+                decoration: InputDecoration(
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.blue, width: 2.0),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black, width: 2.0),
+                    ),
+                    hintText: 'Digite seu email...',
+                    labelText: 'Email',
+                    labelStyle: TextStyle(color: Colors.black),
+                    prefixIcon: Icon(Icons.alternate_email),
+                    border: OutlineInputBorder()),
               ),
             const SizedBox(height: 20),
             TextField(
                 controller: txtNome,
-                decoration: const InputDecoration(
-                  fillColor: Color.fromARGB(255, 138, 141, 144),
-                  filled: true,
-                  labelText: 'Nome',
-                  labelStyle: TextStyle(
-                    color: Color.fromARGB(255, 255, 255,
-                        255), // Definindo a cor branca para o label
-                  ),
-                  border: OutlineInputBorder(),
-                ),
-                style: TextStyle(
-                  color: Colors.white,
-                ),
+                decoration: InputDecoration(
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.blue, width: 2.0),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black, width: 2.0),
+                    ),
+                    hintText: 'Digite seu nome...',
+                    labelText: 'Nome',
+                    labelStyle: TextStyle(color: Colors.black),
+                    prefixIcon: Icon(Icons.person_2),
+                    border: OutlineInputBorder()),
               ),
               SizedBox(height: 20),
               TextField(
-                decoration: const InputDecoration(
-                  fillColor: Color.fromARGB(255, 138, 141, 144),
-                  filled: true,
-                  labelText: 'Número de celular',
-                  labelStyle: TextStyle(
-                    color: Color.fromARGB(255, 255, 255,
-                        255), // Definindo a cor branca para o label
-                  ),
-                  border: OutlineInputBorder(),
-                ),
-                style: TextStyle(
-                  color: Colors.white,
-                ),
+                controller: txtTelefone,
+                decoration: InputDecoration(
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.blue, width: 2.0),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black, width: 2.0),
+                    ),
+                    hintText: 'Digite seu numero...',
+                    labelText: 'Numero',
+                    labelStyle: TextStyle(color: Colors.black),
+                    prefixIcon: Icon(Icons.smartphone),
+                    border: OutlineInputBorder()),
               ),
-              SizedBox(height: 10),
+              SizedBox(height: 20),
               TextField(
                 controller: txtSenha,
-                decoration: const InputDecoration(
-                  fillColor: Color.fromARGB(255, 138, 141, 144),
-                  filled: true,
-                  labelText: 'Senha',
-                  labelStyle: TextStyle(
-                    color: Color.fromARGB(255, 255, 255,
-                        255), // Definindo a cor branca para o label
-                  ),
-                  border: OutlineInputBorder(),
-                ),
-                style: TextStyle(
-                  color: Colors.white,
-                ),
+                obscureText: true,
+                decoration: InputDecoration(
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.blue, width: 2.0),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black, width: 2.0),
+                    ),
+                    hintText: 'Digite sua senha...',
+                    labelText: 'Senha',
+                    labelStyle: TextStyle(color: Colors.black),
+                    prefixIcon: Icon(Icons.private_connectivity),
+                    border: OutlineInputBorder()),
               ),
-              SizedBox(height:50),
+              SizedBox(height:30),
             SizedBox(
-              width: 170,
-              height: 70,
+              width: 150,
+              height: 50,
             child: ElevatedButton(
               onPressed: () {
                     LoginController().criarConta(
@@ -111,6 +120,7 @@ class _CadastroState extends State<Cadastro> {
                       txtNome.text,
                       txtEmail.text,
                       txtSenha.text,
+                      txtTelefone.text,
                     );
                   },
               child: const Text(
@@ -118,33 +128,32 @@ class _CadastroState extends State<Cadastro> {
                 style: TextStyle(
                   color: Color.fromARGB(255, 255, 255, 255),
                   fontWeight: FontWeight.bold,
-                  fontSize: 20,
+                  fontSize: 18,
                 ),
               ),
             ),
             ),
-
+            SizedBox(height: 20,),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text('Cancelar',
+                  style: TextStyle(
+                    fontSize: 15,
+                    color: Color(0xFF0091ff),
+                    fontWeight: FontWeight.normal, // adicionado
+                  ),),
+                  
+                ),
+                              ],
+            ),
           ],
         ),
       ),
     );
   }
 }
-
-/*Route login() {
-  return PageRouteBuilder(
-    pageBuilder: (context, animation, secondaryAnimation) => const LoginPage(),
-    transitionsBuilder: (context, animation, secondaryAnimation, child) {
-      const begin = Offset(0.0, 1.0);
-      const end = Offset.zero;
-      const curve = Curves.ease;
-
-      var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-
-      return SlideTransition(
-        position: animation.drive(tween),
-        child: child,
-      );
-    },
-  );
-}*/

@@ -9,7 +9,7 @@ class LoginController {
   // Criação de um nova conta de usuário
   // no Firebase Authentication
   //
-  criarConta(context, nome, email, senha) {
+  criarConta(context, nome, email, senha, telefone) {
     FirebaseAuth.instance
         .createUserWithEmailAndPassword(
       email: email,
@@ -20,6 +20,8 @@ class LoginController {
       FirebaseFirestore.instance.collection('usuarios').add({
         'uid': resultado.user!.uid,
         'nome': nome,
+        'e-mail': email,
+        'telefone': telefone,
       });
 
       sucesso(context, 'Usuário criado com sucesso.');
@@ -103,6 +105,7 @@ class LoginController {
   //
   Future<String> usuarioLogado() async {
     var usuario = '';
+    var email = '';
     await FirebaseFirestore.instance
         .collection('usuarios')
         .where('uid', isEqualTo: idUsuario())
@@ -110,6 +113,7 @@ class LoginController {
         .then(
       (resultado) {
         usuario = resultado.docs[0].data()['nome'] ?? '';
+        email = resultado.docs[0].data()['email'] ?? '';
       },
     );
     return usuario;

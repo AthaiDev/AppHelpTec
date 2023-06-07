@@ -7,13 +7,15 @@ class EsqueciMinhaSenha extends StatefulWidget {
 
 class _EsqueciMinhaSenhaState extends State<EsqueciMinhaSenha> {
   final _formKey = GlobalKey<FormState>();
-  final _emailController = TextEditingController();
+  var txtEmailEsqueceuSenha = TextEditingController();
+
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Esqueceu a senha'),
+        title: Text('Redefinição de senha'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -23,7 +25,7 @@ class _EsqueciMinhaSenhaState extends State<EsqueciMinhaSenha> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               TextFormField(
-                controller: _emailController,
+                controller: txtEmailEsqueceuSenha,
                 keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(
                   labelText: 'Email',
@@ -45,12 +47,12 @@ class _EsqueciMinhaSenhaState extends State<EsqueciMinhaSenha> {
                       builder: (BuildContext context) {
                         return SimpleDialog(
                           title: Text('Email enviado com sucesso'),
+                          
                           children: <Widget>[
                             TextButton(
                               child: Text('Fechar'),
                               onPressed: () {
-                                Navigator.pop(context);
-                                Navigator.pop(context);
+                                Navigator.pushNamed(context, 'login');
                               },
                             ),
                           ],
@@ -59,7 +61,7 @@ class _EsqueciMinhaSenhaState extends State<EsqueciMinhaSenha> {
                     );
                   }
                 },
-                child: Text('Enviar email de redefinição'),
+                child: Text('Enviar'),
               ),
             ],
           ),
