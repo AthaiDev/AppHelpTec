@@ -13,7 +13,7 @@ class Menu extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Menu'),
+        title: Text('Dashboard', textAlign: TextAlign.center),
       ),
       drawer: Drawer(
         child: ListView(
@@ -80,6 +80,150 @@ class Menu extends StatelessWidget {
             ),
           ],
         ),
+      ),
+      body: Padding(
+        padding: EdgeInsets.fromLTRB(40, 30, 40, 10),
+        child: Column(
+          children: [
+            SizedBox(
+                    width: 300,
+                    height: 50,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        LoginController();
+                      },
+                      child: Text('MPCT'),
+                      style: ElevatedButton.styleFrom(
+                        primary: Color(0xFF0091ff),
+                        textStyle: TextStyle(
+                          color: Colors.black,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 30),
+                  SizedBox(
+                width: 300,
+                height: 50,
+                child: ElevatedButton(
+                  onPressed: () {
+                    LoginController();
+                  },
+                  child: Text('Engenharia de Software'),
+                  style: ElevatedButton.styleFrom(
+                    primary: Color(0xFF0091ff),
+                    textStyle: TextStyle(
+                      color: Colors.black,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 30),
+                  SizedBox(
+                width: 300,
+                height: 50,
+                child: ElevatedButton(
+                  onPressed: () {
+                    LoginController();
+                  },
+                  child: Text('Sistemas Operacionais'),
+                  style: ElevatedButton.styleFrom(
+                    primary: Color(0xFF0091ff),
+                    textStyle: TextStyle(
+                      color: Colors.black,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 30),
+                  SizedBox(
+                width: 300,
+                height: 50,
+                child: ElevatedButton(
+                  onPressed: () {
+                    LoginController();
+                  },
+                  child: Text('Engenharia de Software',
+                  textAlign: TextAlign.justify),
+                  style: ElevatedButton.styleFrom(
+                    primary: Color(0xFF0091ff),
+                    textStyle: TextStyle(
+                      color: Colors.black,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 30),
+                  SizedBox(
+                width: 300,
+                height: 50,
+                child: ElevatedButton(
+                  onPressed: () {
+                    LoginController();
+                  },
+                  child: Text('Programação para Dispositivos Móveis', textAlign: TextAlign.center),
+                  style: ElevatedButton.styleFrom(
+                    primary: Color(0xFF0091ff),
+                    textStyle: TextStyle(
+                      color: Colors.black,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 30),
+                  SizedBox(
+                width: 300,
+                height: 50,
+                child: ElevatedButton(
+                  onPressed: () {
+                    LoginController();
+                  },
+                  child: Text('Programação Orientada a Objetos', textAlign: TextAlign.center),
+                  style: ElevatedButton.styleFrom(
+                    primary: Color(0xFF0091ff),
+                    textStyle: TextStyle(
+                      color: Colors.black,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 30),
+                  SizedBox(
+                    
+                width: 300,
+                height: 50,
+                child: ElevatedButton(
+                  onPressed: () {
+                    LoginController();
+                  },
+                  
+                  child: Text('Banco de Dados', textAlign: TextAlign.center),
+                  style: ElevatedButton.styleFrom(
+                    primary: Color(0xFF0091ff),
+                    textStyle: TextStyle(
+                      color: Colors.black,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ),
+          ],
+        ),
+
+              
       ),
     );
   }
