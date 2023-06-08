@@ -1,3 +1,5 @@
+// ignore_for_file: unused_import
+
 import 'package:flutter_projeto/Tela_login/login.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter/material.dart';

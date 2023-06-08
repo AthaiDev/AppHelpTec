@@ -1,3 +1,5 @@
+// ignore_for_file: unused_import
+
 import 'package:flutter/material.dart';
 import 'package:flutter_projeto/Tela_esqueceu_senha/tela_esqueceu_senha.dart';
 import '../tela_esqueceu_senha/tela_esqueceu_senha.dart';

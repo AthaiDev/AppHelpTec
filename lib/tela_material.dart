@@ -1,3 +1,5 @@
+// ignore_for_file: unused_import
+
 import 'package:flutter/material.dart';
 export '../tela_cadastro/tela_cadastro.dart';
 import '../controller/login_controller.dart';
