@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, unused_import
 import 'package:device_preview/device_preview.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +9,8 @@ import 'firebase_options.dart';
 import 'Tela_cadastro/tela_cadastro.dart';
 import 'Tela_login/login.dart';
 import 'package:flutter_projeto/tela_menu.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 
 Future<void> main() async {
   await Firebase.initializeApp(

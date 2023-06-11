@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'Tela_login/login.dart';
 
 
+
 class Configuracao extends StatelessWidget {
   const Configuracao({Key? key}) : super(key: key);
 

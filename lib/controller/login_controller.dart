@@ -2,32 +2,24 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import '../util.dart';
-
 class LoginController {
-  //
-  // Criação de um nova conta de usuário
-  // no Firebase Authentication
-  //
   criarConta(context, nome, email, senha, telefone) {
     FirebaseAuth.instance
         .createUserWithEmailAndPassword(
-      email: email,
-      password: senha,
-    )
+          email: email,
+          password: senha,
+        )
         .then((resultado) {
-      //Conta Criada com Sucesso
       FirebaseFirestore.instance.collection('usuarios').add({
         'uid': resultado.user!.uid,
         'nome': nome,
-        'e-mail': email,
+        'email': email,
         'telefone': telefone,
       });
 
       sucesso(context, 'Usuário criado com sucesso.');
       Navigator.pop(context);
     }).catchError((e) {
-      //Não foi possível criar a conta
       switch (e.code) {
         case 'email-already-in-use':
           erro(context, 'O email já foi cadastrado.');
@@ -41,11 +33,6 @@ class LoginController {
     });
   }
 
-  //
-  // LOGIN
-  // Efetuar o login de um usuário previamente cadastrado
-  // no serviço Firebase Authentication
-  //
   login(context, email, senha) {
     FirebaseAuth.instance
         .signInWithEmailAndPassword(email: email, password: senha)
@@ -69,16 +56,9 @@ class LoginController {
     });
   }
 
-  //
-  // ESQUECEU A SENHA
-  // Envia uma mensagem de email para recuperação de senha para
-  // um conta de email válida
-  //
   esqueceuSenha(context, String email) {
     if (email.isNotEmpty) {
-      FirebaseAuth.instance.sendPasswordResetEmail(
-        email: email,
-      );
+      FirebaseAuth.instance.sendPasswordResetEmail(email: email);
       sucesso(context, 'Email enviado com sucesso.');
     } else {
       erro(context, 'Informe o email para recuperar a conta.');
@@ -86,36 +66,146 @@ class LoginController {
     Navigator.pop(context);
   }
 
-  //
-  // LOGOUT
-  //
   logout() {
     FirebaseAuth.instance.signOut();
   }
 
-  //
-  // ID do Usuário Logado
-  //
-  idUsuario() {
+  String idUsuario() {
     return FirebaseAuth.instance.currentUser!.uid;
   }
 
-  //
-  // NOME do Usuário Logado
-  //
   Future<String> usuarioLogado() async {
     var usuario = '';
-    var email = '';
     await FirebaseFirestore.instance
         .collection('usuarios')
         .where('uid', isEqualTo: idUsuario())
         .get()
-        .then(
-      (resultado) {
-        usuario = resultado.docs[0].data()['nome'] ?? '';
-        email = resultado.docs[0].data()['email'] ?? '';
+        .then((resultado) {
+      usuario = resultado.docs[0].data()['nome'] ?? '';
+    });
+    return usuario;
+  }
+
+  void alterarNome(BuildContext context, String novoNome) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text('Alterar Nome'),
+        content: TextField(
+          decoration: InputDecoration(hintText: 'Digite o novo nome'),
+          onChanged: (value) {
+            novoNome = value;
+          },
+        ),
+        actions: [
+          TextButton(
+            child: Text('Cancelar'),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+          TextButton(
+            child: Text('Salvar'),
+            onPressed: () {
+              String userId = idUsuario();
+
+              FirebaseFirestore.instance
+                  .collection('usuarios')
+                  .doc(userId)
+                  .update({'nome': novoNome}).then((_) {
+                sucesso(context, 'Nome do usuário atualizado com sucesso.');
+              }).catchError((e) {
+                erro(context, 'Erro ao atualizar o nome do usuário: $e');
+              });
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      );
+    },
+  );
+}
+
+  void alterarSenha(BuildContext context) {
+    String novaSenha = '';
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Alterar Senha'),
+          content: TextField(
+            decoration: InputDecoration(hintText: 'Digite a nova senha'),
+            onChanged: (value) {
+              novaSenha = value;
+            },
+          ),
+          actions: [
+            TextButton(
+              child: Text('Cancelar'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: Text('Salvar'),
+              onPressed: () async {
+                try {
+                  User? user = FirebaseAuth.instance.currentUser;
+                  if (user != null) {
+                    await user.updatePassword(novaSenha);
+                    sucesso(context, 'Senha alterada com sucesso.');
+                  }
+                } catch (e) {
+                  erro(context, 'Erro ao alterar a senha: $e');
+                }
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
       },
     );
-    return usuario;
+  }
+
+  void sucesso(BuildContext context, String mensagem) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Sucesso'),
+          content: Text(mensagem),
+          actions: [
+            TextButton(
+              child: Text('Fechar'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void erro(BuildContext context, String mensagem) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Erro'),
+          content: Text(mensagem),
+          actions: [
+            TextButton(
+              child: Text('Fechar'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 }
