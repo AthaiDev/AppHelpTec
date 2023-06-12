@@ -90,9 +90,12 @@ class LoginController {
   showDialog(
     context: context,
     builder: (BuildContext context) {
+      TextEditingController nomeController = TextEditingController(text: novoNome);
+
       return AlertDialog(
         title: Text('Alterar Nome'),
         content: TextField(
+          controller: nomeController,
           decoration: InputDecoration(hintText: 'Digite o novo nome'),
           onChanged: (value) {
             novoNome = value;

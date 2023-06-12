@@ -7,6 +7,7 @@ import '../tela_login/login.dart';
 import '../tela_cadastro/tela_cadastro.dart';
 import 'package:flutter/material.dart';
 import '../controller/login_controller.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class Menu extends StatelessWidget {
   const Menu({Key? key}) : super(key: key);
@@ -50,138 +51,185 @@ class Menu extends StatelessWidget {
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
-            FutureBuilder<String>(
-              future: LoginController().usuarioLogado(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.done) {
-                  return Directionality(
-                      textDirection: TextDirection.ltr,
-                      child: TextButton.icon(
-                        style: TextButton.styleFrom(
-                          foregroundColor: Colors.black,
-                          textStyle: TextStyle(fontSize: 12),
-                        ),
-                        onPressed: () {
-                          LoginController().logout();
-                          Navigator.pushReplacementNamed(context, 'login');
-                        },
-                        icon: Icon(Icons.exit_to_app, size: 14),
-                        label: Text(snapshot.data.toString()),
-                      ));
-                }
-                return Text('');
-              },
-            ),
+            FutureBuilder<User?>(
+  future: FirebaseAuth.instance.authStateChanges().first,
+  builder: (BuildContext context, AsyncSnapshot<User?> snapshot) {
+    if (snapshot.connectionState == ConnectionState.done && snapshot.hasData) {
+      final User? user = snapshot.data;
+      final String nomeUsuario = user?.displayName ?? '';
+      final String emailUsuario = user?.email ?? '';
+
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(Icons.person, size: 14),
+              SizedBox(width: 4),
+              Text(
+                nomeUsuario,
+                style: TextStyle(fontSize: 12),
+              ),
+            ],
+          ),
+          SizedBox(height: 4),
+          Row(
+            children: [
+              Icon(Icons.email, size: 14),
+              SizedBox(width: 4),
+              Text(
+                emailUsuario,
+                style: TextStyle(fontSize: 12),
+              ),
+            ],
+          ),
+        ],
+      );
+    }
+    return Text('');
+  },
+),
             Container(
               padding: EdgeInsets.fromLTRB(40, 10, 40, 10),
               child: Column(
                 children: [
                   Column(
                     children: [
-                      Icon(
-                        Icons.person,
-                        size: 24,
-                      ),
-                      SizedBox(width: 10),
-                      ElevatedButton(
-                        child: Text('Alterar nome'),
-                        onPressed: () {
-                          String novoNome = '';
-                          showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return AlertDialog(
-                                title: Text('Alterar Nome'),
-                                content: TextField(
-                                  decoration: InputDecoration(
-                                      hintText: 'Digite o novo nome'),
-                                  onChanged: (value) {
-                                    novoNome = value;
+                      SizedBox(height: 30),
+                      Row(
+                        children: [
+                          Icon(
+                            Icons.person,
+                            size: 24,
+                          ),
+                          SizedBox(width: 10),
+                          SizedBox(
+                            width: 180,
+                            height: 50,
+                            child: ElevatedButton(
+                              child: Text('Alterar nome'),
+                              onPressed: () {
+                                String novoNome = '';
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: Text('Alterar Nome'),
+                                      content: TextField(
+                                        decoration: InputDecoration(
+                                          hintText: 'Digite o novo nome',
+                                        ),
+                                        onChanged: (value) {
+                                          novoNome = value;
+                                        },
+                                      ),
+                                      actions: [
+                                        TextButton(
+                                          child: Text('Cancelar'),
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                        ),
+                                        TextButton(
+                                          child: Text('Salvar'),
+                                          onPressed: () {
+                                            LoginController()
+                                                .alterarNome(context, novoNome);
+                                          },
+                                        ),
+                                      ],
+                                    );
                                   },
-                                ),
-                                actions: [
-                                  TextButton(
-                                    child: Text('Cancelar'),
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                    },
-                                  ),
-                                  TextButton(
-                                    child: Text('Salvar'),
-                                    onPressed: () {
-                                      LoginController()
-                                          .alterarNome(context, novoNome);
-                                    },
-                                  ),
-                                ],
-                              );
-                            },
-                          );
-                        },
+                                );
+                              },
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
-                  SizedBox(height: 16),
-                  Column(
+                  SizedBox(height:30),
+                  Row(
                     children: [
                       Icon(
                         Icons.lock,
                         size: 24,
                       ),
                       SizedBox(width: 10),
-                      ElevatedButton(
-                        child: Text('Alterar senha'),
-                        onPressed: () {
-                          LoginController().alterarSenha(context);
-                        },
+                      SizedBox(
+                        width: 180,
+                        height: 50,
+                        child: ElevatedButton(
+                          child: Text('Alterar senha'),
+                          onPressed: () {
+                            LoginController().alterarSenha(context);
+                          },
+                        ),
                       ),
                     ],
                   ),
-                  SizedBox(height: 16),
-                  Column(
+                  SizedBox(height: 30),
+                  Row(
                     children: [
                       Icon(
                         Icons.document_scanner_outlined,
                         size: 24,
                       ),
                       SizedBox(width: 10),
-                      ElevatedButton(
-                        child: Text('Termos de uso'),
-                        onPressed: () {
-                          showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return AlertDialog(
-                                title: Text('Termos de uso'),
-                                actions: [
-                                  TextButton(
-                                    child: Text('Voltar'),
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                    },
-                                  ),
-                                ],
-                              );
-                            },
-                          );
-                        },
+                      Column(
+                        children: [
+                          SizedBox(
+                            width: 180,
+                            height: 50,
+                            child: ElevatedButton(
+                              child: Text('Termos de uso'),
+                              onPressed: () {
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: Text('Termos de uso'),
+                                      actions: [
+                                        TextButton(
+                                          child: Text('Voltar'),
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              },
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
-                  
-                  SizedBox(width: 10),
-                  Column(
-                    children: [
+                  SizedBox(height: 30),
+                  Row(
+                    children:[
                       Icon(
                         Icons.exit_to_app,
                         size: 24,
                       ),
-                      ElevatedButton(
-                        child: Text('Sair'),
-                        onPressed: () {
-                          LoginController().logout();
-                          Navigator.pushReplacementNamed(context, 'login');
-                        }
+                      SizedBox(width: 10),
+                      Column(
+                        children: [
+                          SizedBox(
+                            width: 180,
+                            height: 50,
+                            child: ElevatedButton(
+                              child: Text('Sair'),
+                              onPressed: () {
+                                LoginController().logout();
+                                Navigator.pushReplacementNamed(
+                                    context, 'login');
+                              },
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
