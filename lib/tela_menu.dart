@@ -12,35 +12,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 class Menu extends StatelessWidget {
   const Menu({Key? key}) : super(key: key);
 
-  Future<void> openDialog(
-      BuildContext context, String message, String novoNome) async {
-    String novoNome = '';
-
-    await showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text(message),
-          content: TextField(
-            decoration: InputDecoration(hintText: 'Escreva Aqui...'),
-            onChanged: (value) {
-              novoNome = value;
-            },
-          ),
-          actions: [
-            TextButton(
-              child: Text('Salvar'),
-              onPressed: () {
-                LoginController().alterarNome(context, novoNome);
-                Navigator.of(context).pop(); // Fechar o diálogo após salvar
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

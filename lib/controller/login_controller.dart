@@ -1,14 +1,14 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class LoginController {
   criarConta(context, nome, email, senha, telefone) {
     FirebaseAuth.instance
         .createUserWithEmailAndPassword(
-          email: email,
-          password: senha,
-        )
+      email: email,
+      password: senha,
+    )
         .then((resultado) {
       FirebaseFirestore.instance.collection('usuarios').add({
         'uid': resultado.user!.uid,
@@ -86,50 +86,23 @@ class LoginController {
     return usuario;
   }
 
-  void alterarNome(BuildContext context, String novoNome) {
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      TextEditingController nomeController = TextEditingController(text: novoNome);
+  Future<String> alterarNome(context, String novoNome) async {
+  var userId = idUsuario(); // Corrigido para userId ao invés de idUsuario
 
-      return AlertDialog(
-        title: Text('Alterar Nome'),
-        content: TextField(
-          controller: nomeController,
-          decoration: InputDecoration(hintText: 'Digite o novo nome'),
-          onChanged: (value) {
-            novoNome = value;
-          },
-        ),
-        actions: [
-          TextButton(
-            child: Text('Cancelar'),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          ),
-          TextButton(
-            child: Text('Salvar'),
-            onPressed: () {
-              String userId = idUsuario();
+  try {
+    await FirebaseFirestore.instance
+        .collection('usuarios')
+        .doc(userId)
+        .set({'nome': novoNome}, SetOptions(merge: true));
 
-              FirebaseFirestore.instance
-                  .collection('usuarios')
-                  .doc(userId)
-                  .update({'nome': novoNome}).then((_) {
-                sucesso(context, 'Nome do usuário atualizado com sucesso.');
-              }).catchError((e) {
-                erro(context, 'Erro ao atualizar o nome do usuário: $e');
-              });
-              Navigator.of(context).pop();
-            },
-          ),
-        ],
-      );
-    },
-  );
+    sucesso(context, 'Nome atualizado com sucesso!');
+    Navigator.of(context).pop();
+    return novoNome;
+  } catch (e) {
+    erro(context, 'Erro na atualização do nome: $e');
+    return '';
+  }
 }
-
   void alterarSenha(BuildContext context) {
     String novaSenha = '';
 
