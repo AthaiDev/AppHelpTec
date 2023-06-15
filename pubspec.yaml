@@ -108,6 +108,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
 
   cupertino_icons: ^1.0.2
+  table_calendar: ^3.0.9
 
 
 
@@ -205,6 +206,7 @@ flutter:
   - lib\image\folhas.gif
   - lib\image\livro.gif
   - lib\image\P1_SOII.pdf
+  - lib\image\esqsenha.png
 
  
 

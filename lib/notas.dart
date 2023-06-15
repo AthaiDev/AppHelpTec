@@ -2,7 +2,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_projeto/nota.dart';
+import 'package:flutter_projeto/model/nota.dart';
 
 import '../controller/login_controller.dart';
 import '../controller/notas_controller.dart';
@@ -24,26 +24,12 @@ class _PrincipalViewState extends State<PrincipalView> {
       appBar: AppBar(
         title: Row(
           children: [
-            Expanded(child: Text('Tarefas')),
+            Expanded(child: Text('Lembretes',)),
             FutureBuilder<String>(
               future: LoginController().usuarioLogado(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.done) {
-                  return Directionality(
-                    textDirection: TextDirection.rtl,
-                    child: TextButton.icon(
-                      style: TextButton.styleFrom(
-                        foregroundColor: Colors.white,
-                        textStyle: TextStyle(fontSize: 12),
-                      ),
-                      onPressed: () {
-                        LoginController().logout();
-                        Navigator.pushReplacementNamed(context, 'login');
-                      },
-                      icon: Icon(Icons.exit_to_app, size: 14),
-                      label: Text(snapshot.data.toString()),
-                    ),
-                  );
+                 
                 }
                 return Text('');
               },
@@ -94,7 +80,9 @@ class _PrincipalViewState extends State<PrincipalView> {
                   );
                 } else {
                   return Center(
-                    child: Text('Nenhuma tarefa encontrada.'),
+                    child: Text('Não há nada a ser lembrado :) \n Divirta-se!', textAlign: TextAlign.center, style: TextStyle(
+                                        fontSize: 18,
+                                      )),
                   );
                 }
             }
@@ -105,7 +93,7 @@ class _PrincipalViewState extends State<PrincipalView> {
         onPressed: () {
           salvarTarefa(context);
         },
-        child: Icon(Icons.add),
+        child: Icon(Icons.calendar_month),
       ),
     );
   }
@@ -119,7 +107,7 @@ class _PrincipalViewState extends State<PrincipalView> {
       builder: (BuildContext context) {
         // retorna um objeto do tipo Dialog
         return AlertDialog(
-          title: Text("Adicionar Tarefa"),
+          title: Text("Adicionar Lembrete"),
           content: SizedBox(
             height: 250,
             width: 300,
@@ -128,7 +116,14 @@ class _PrincipalViewState extends State<PrincipalView> {
                 TextField(
                   controller: txtTitulo,
                   decoration: InputDecoration(
-                    labelText: 'Título',
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.blue, width: 2.0),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black, width: 2.0),
+                    ),
+                    labelText: 'Data ex: dd/mm',
+                    labelStyle: TextStyle(color: Colors.black),
                     prefixIcon: Icon(Icons.description),
                     border: OutlineInputBorder(),
                   ),
@@ -138,7 +133,14 @@ class _PrincipalViewState extends State<PrincipalView> {
                   controller: txtDescricao,
                   maxLines: 5,
                   decoration: InputDecoration(
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.blue, width: 2.0),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black, width: 2.0),
+                    ),
                     labelText: 'Descrição',
+                    labelStyle: TextStyle(color: Colors.black),
                     alignLabelWithHint: true,
                     border: OutlineInputBorder(),
                   ),

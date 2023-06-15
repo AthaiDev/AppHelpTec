@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_projeto/nota.dart';
+import 'package:flutter_projeto/model/nota.dart';
 import 'login_controller.dart';
 
 class notasController {

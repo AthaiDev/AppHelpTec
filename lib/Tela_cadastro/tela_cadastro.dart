@@ -41,7 +41,7 @@ class _CadastroState extends State<Cadastro> {
                   style: TextStyle(
                     fontSize: 20,
                     color: Color(0xFF0091ff),
-                    fontWeight: FontWeight.normal, // adicionado
+                    fontWeight: FontWeight.bold, // adicionado
                   ),
                 ),
                 ),
@@ -134,7 +134,7 @@ class _CadastroState extends State<Cadastro> {
               ),
             ),
             ),
-            SizedBox(height: 20,),
+            SizedBox(height: 10,),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

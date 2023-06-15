@@ -30,8 +30,13 @@ class _EsqueciMinhaSenhaState extends State<EsqueciMinhaSenha> {
         showDialog(
         context: context, 
         builder: (context) {
+          Future.delayed(Duration(seconds: 2), () {
+          Navigator.of(context).pop(true);
+          Navigator.pop(context); // Fecha o diálogo após 2 segundos
+        });
           return AlertDialog(
             content : Text("Email de recuperação de senha enviado com sucesso! Cheque seu e-mail."),
+            
           );
          },
        );
@@ -54,46 +59,71 @@ class _EsqueciMinhaSenhaState extends State<EsqueciMinhaSenha> {
       appBar: AppBar(
         backgroundColor:  Color(0xFF0091ff),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [ 
-      Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 25.0),
-        child: Text(
-          "Insira seu email para enviarmos o link de recuperação",
-          textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 20),
-        ),
-      ),
-      SizedBox(height: 10),
-      Padding(padding: const EdgeInsets.symmetric(horizontal: 25.0),
-      child: TextField(
-        controller: _emailController,
-        decoration: InputDecoration(
-          enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.black),
-            borderRadius: BorderRadius.circular(12),
+      body: Padding(
+        padding: EdgeInsets.fromLTRB(40, 10, 40, 10),
+        child: Column(
+          //mainAxisAlignment: MainAxisAlignment.center,
+          
+          children: [
+            SizedBox(height: 60,),
+            Container(
+                child: Image.asset(
+                  'lib/image/esqsenha.png',
+                  width: 138,
+                  height: 128,
+                  fit: BoxFit.contain,
+                ),
+              ),
+              SizedBox(height: 40),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 0.0),
+          child: Text(
+            "Insira seu email para enviarmos o link de recuperação",
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 18),
           ),
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.deepPurple),
-            borderRadius: BorderRadius.circular(12),
-          ),
-          hintText: 'Email',
-          fillColor: Colors.grey[200],
-          filled: true,
         ),
-       ),
+        SizedBox(height: 30),
+        Padding(padding: const EdgeInsets.symmetric(horizontal: 0.0),
+        child: TextField(
+          controller: _emailController,
+          decoration: InputDecoration(
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.blue, width: 2.0),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.black, width: 2.0
+              ),
+            ),
+            hintText: 'Digite seu email...',
+            fillColor: Color.fromARGB(255, 255, 255, 255),
+            filled: true,
+          ),
+         ),
+        ),
+        SizedBox(height: 30),
+        SizedBox(
+          width: 160,
+            height: 50,
+          child: ElevatedButton(
+           onPressed: () {
+          passwordReset();
+            },
+          child: Text('Redefinir a senha'),
+          style: ElevatedButton.styleFrom(
+            primary: Color(0xFF0091ff),
+                        textStyle: TextStyle(
+                          color: Colors.black,
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                        ),
+          )
+          //color: Color(0xFF0091ff),
+        ),
+        ),
+           ],
+          ),
       ),
-      SizedBox(height: 10),
-      MaterialButton(
-       onPressed: () {
-      passwordReset();
-    },
-  child: Text('Redefinir Senha'),
-  color: Color(0xFF0091ff),
-),
-     ],
-    ),
    );
   }
 }

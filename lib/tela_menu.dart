@@ -29,7 +29,8 @@ class _MenuState extends State<Menu> {
       title: Text('Menu', textAlign: TextAlign.center),
         actions: [
           IconButton(
-            icon: Icon(Icons.add),
+            icon: Icon(Icons.calendar_month_rounded,
+            size: 30),
             onPressed: () {
               // Navegar para a tela de adicionar lembrete
               Navigator.pushNamed(context, 'adicionar_lembrete');
@@ -183,9 +184,20 @@ class _MenuState extends State<Menu> {
               height: 50,
               child: ElevatedButton(
                 onPressed: () {
-                  LoginController();
+                  showDialog(
+        context: context, 
+        builder: (context) {
+          Future.delayed(Duration(seconds: 2), () {
+          Navigator.of(context).pop(true);// Fecha o diálogo após 2 segundos
+        });
+          return AlertDialog(
+            content : Text("Essa função será implementada em breve..."),
+            
+          );
+         },
+       );
                 },
-                child: Text('MPCT'),
+                child: Text('Programação para Dispositivos Móveis', textAlign: TextAlign.center),
                 style: ElevatedButton.styleFrom(
                   primary: Color(0xFF0091ff),
                   textStyle: TextStyle(
@@ -262,7 +274,7 @@ class _MenuState extends State<Menu> {
                 onPressed: () {
                   Navigator.pushNamed(context, 'materia');
                 },
-                child: Text('Programação para Dispositivos Móveis',
+                child: Text('MPCT',
                     textAlign: TextAlign.center),
                 style: ElevatedButton.styleFrom(
                   primary: Color(0xFF0091ff),

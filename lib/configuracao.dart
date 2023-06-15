@@ -25,7 +25,7 @@ class _ConfigState extends State<Config> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Dashboard', textAlign: TextAlign.center),
+        title: Text('Configurações', textAlign: TextAlign.center),
       ),
       body: Padding(
         padding: EdgeInsets.fromLTRB(40, 30, 40, 10),

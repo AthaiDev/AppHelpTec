@@ -6,6 +6,7 @@ import 'package:flutter_projeto/Tela_carregamento.dart';
 import 'package:flutter_projeto/Tela_esqueceu_senha/tela_esqueceu_senha.dart';
 import 'package:flutter_projeto/configuracao.dart';
 import 'package:flutter_projeto/materiaflutter.dart';
+import 'package:flutter_projeto/notas.dart';
 import 'firebase_options.dart';
 import 'Tela_cadastro/tela_cadastro.dart';
 import 'Tela_login/login.dart';
@@ -33,6 +34,7 @@ Future<void> main() async {
           'principal': (context) => Menu(),
           'esqueci': (context) => EsqueciMinhaSenha(),
           'configuracao': (context) => Config(),
+          'adicionar_lembrete': (context) => PrincipalView(),
           //'materia': (context) => PDFPage(pdfPath: 'lib\image\P1_SOII.pdf'),
         },
       ),
