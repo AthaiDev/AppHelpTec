@@ -86,24 +86,24 @@ class LoginController {
     return usuario;
   }
 
-  Future<String> alterarNome(context, String novoNome) async {
-  var userId = idUsuario(); // Corrigido para userId ao invés de idUsuario
+  Future<String> atualizarNomeUsuario(BuildContext context, novoNome) async {
+  var nomeNovo = novoNome;
+  var userId =  FirebaseAuth.instance.currentUser!.uid;
 
-  try {
-    await FirebaseFirestore.instance
-        .collection('usuarios')
-        .doc(userId)
-        .set({'nome': novoNome}, SetOptions(merge: true));
+  FirebaseFirestore.instance
+      .collection('usuarios')
+      .doc(userId)
+      .set({'nome': novoNome}, SetOptions(merge: true))
+      .then((result) {
+    sucesso(context, 'Nome do usuário atualizado com sucesso.');
+  }).catchError((e) {
+    erro(context, 'Erro na atualização: ${e.toString()}');
+  });
 
-    sucesso(context, 'Nome atualizado com sucesso!');
-    Navigator.of(context).pop();
-    return novoNome;
-  } catch (e) {
-    erro(context, 'Erro na atualização do nome: $e');
-    return '';
-  }
+  return nomeNovo;
 }
-  void alterarSenha(BuildContext context) {
+
+  void atualizarSenha(BuildContext context) {
     String novaSenha = '';
 
     showDialog(
@@ -184,4 +184,4 @@ class LoginController {
       },
     );
   }
-}
+  }

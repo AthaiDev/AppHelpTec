@@ -76,6 +76,8 @@ environment:
 
 dependencies:
 
+  webview_flutter: ^2.0.14
+
   flutter_spinkit: ^5.1.0
 
   cloud_firestore: ^4.7.0
@@ -202,6 +204,7 @@ flutter:
   - lib\image\oliver.jpeg
   - lib\image\folhas.gif
   - lib\image\livro.gif
+  - lib\image\P1_SOII.pdf
 
  
 

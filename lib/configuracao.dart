@@ -1,119 +1,104 @@
+// ignore_for_file: unused_import, duplicate_import
+import 'dart:js';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import '../configuracao.dart';
+import '../tela_login/login.dart';
+import '../tela_cadastro/tela_cadastro.dart';
 import 'package:flutter/material.dart';
-import 'Tela_login/login.dart';
+import '../controller/login_controller.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
+class Config extends StatefulWidget {
+  const Config({Key? key}) : super(key: key);
 
+  @override
+  _ConfigState createState() => _ConfigState();
+}
 
-class Configuracao extends StatelessWidget {
-  const Configuracao({Key? key}) : super(key: key);
+class _ConfigState extends State<Config> {
+  TextEditingController nomeController = TextEditingController();
+  var txtNome = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        padding: const EdgeInsets.all(20),
+      appBar: AppBar(
+        title: Text('Dashboard', textAlign: TextAlign.center),
+      ),
+      body: Padding(
+        padding: EdgeInsets.fromLTRB(40, 30, 40, 10),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(height:50),
-            SizedBox(
-              child: Image.asset(
-                'lib/images/logocad.png',
-                width: 500,
-                height: 200,
-              ),
-            ),
-             TextFormField(
-                decoration: const InputDecoration(
-                  fillColor: Color.fromARGB(255, 138, 141, 144),
-                  filled: true,
-                  labelText: 'E-mail',
-                  labelStyle: TextStyle(
-                    color: Color.fromARGB(255, 255, 255,
-                        255), // Definindo a cor branca para o label
-                  ),
-                  border: OutlineInputBorder(),
-                ),
-                style: TextStyle(
-                  color: Colors.white,
-                ),
-              ),
-            const SizedBox(height: 20),
-            TextFormField(
-                decoration: const InputDecoration(
-                  fillColor: Color.fromARGB(255, 138, 141, 144),
-                  filled: true,
-                  labelText: 'Nome',
-                  labelStyle: TextStyle(
-                    color: Color.fromARGB(255, 255, 255,
-                        255), // Definindo a cor branca para o label
-                  ),
-                  border: OutlineInputBorder(),
-                ),
-                style: TextStyle(
-                  color: Colors.white,
-                ),
-              ),
-              SizedBox(height: 20),
-              TextFormField(
-                decoration: const InputDecoration(
-                  fillColor: Color.fromARGB(255, 138, 141, 144),
-                  filled: true,
-                  labelText: 'Número de celular com ddd',
-                  labelStyle: TextStyle(
-                    color: Color.fromARGB(255, 255, 255,
-                        255), // Definindo a cor branca para o label
-                  ),
-                  border: OutlineInputBorder(),
-                ),
-                style: TextStyle(
-                  color: Colors.white,
-                ),
-              ),
-              SizedBox(height: 10),
-              TextFormField(
-                decoration: const InputDecoration(
-                  fillColor: Color.fromARGB(255, 138, 141, 144),
-                  filled: true,
-                  labelText: 'Senha',
-                  labelStyle: TextStyle(
-                    color: Color.fromARGB(255, 255, 255,
-                        255), // Definindo a cor branca para o label
-                  ),
-                  border: OutlineInputBorder(),
-                ),
-                style: TextStyle(
-                  color: Colors.white,
-                ),
-              ),
-              SizedBox(height:50),
-            SizedBox(
-              width: 170,
-              height: 70,
-            child: ElevatedButton(
-              onPressed: () {
-                // Lógica de cadastro aqui
-              },
-              child: const Text(
-                'Salvar',
-                style: TextStyle(
-                  color: Color.fromARGB(255, 255, 255, 255),
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
+            Align(
+              alignment: Alignment.center,
+              child: SizedBox(
+                width: 180,
+                height: 50,
+                child: ElevatedButton(
+                  child: Text('Alterar nome',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.normal, // adicionado
+                  ),),
+                  onPressed: () {
+                    String novoNome = '';
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Text('Alterar Nome'),
+                          content: TextField(
+                            controller: nomeController,
+                            decoration: InputDecoration(
+                              hintText: 'Digite o novo nome',
+                            ),
+                          ),
+                          actions: [
+                            TextButton(
+                              child: Text('Cancelar'),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                            TextButton(
+                              child: Text('Salvar'),
+                              onPressed: () async {
+                                String novoNome = nomeController.text.trim();
+                                if (novoNome.isNotEmpty) {
+                                  setState(() {
+                                    txtNome.text = novoNome;
+                                  });
+
+                                  await LoginController()
+                                      .atualizarNomeUsuario(context, novoNome);
+                                  Navigator.of(context).pop();
+                                }
+                              },
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  },
                 ),
               ),
             ),
-            ),
-            SizedBox(height:50),
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop(login());
-              },
-              child: const Text(
-                'Voltar',
-                style: TextStyle(
-                  color: Color.fromARGB(255, 0, 0, 0),
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18,
+            SizedBox(height: 30),
+            Align(
+              alignment: Alignment.center,
+              child: SizedBox(
+                width: 180,
+                height: 50,
+                child: ElevatedButton(
+                  child: Text('Alterar senha',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.normal, // adicionado
+                  ),),
+                  onPressed: () {
+                    LoginController().atualizarSenha(context);
+                  },
                 ),
               ),
             ),
@@ -122,22 +107,4 @@ class Configuracao extends StatelessWidget {
       ),
     );
   }
-}
-
-Route login() {
-  return PageRouteBuilder(
-    pageBuilder: (context, animation, secondaryAnimation) => const LoginPage(),
-    transitionsBuilder: (context, animation, secondaryAnimation, child) {
-      const begin = Offset(0.0, 1.0);
-      const end = Offset.zero;
-      const curve = Curves.ease;
-
-      var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-
-      return SlideTransition(
-        position: animation.drive(tween),
-        child: child,
-      );
-    },
-  );
 }

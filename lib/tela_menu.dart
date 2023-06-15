@@ -9,8 +9,17 @@ import 'package:flutter/material.dart';
 import '../controller/login_controller.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-class Menu extends StatelessWidget {
+class Menu extends StatefulWidget {
   const Menu({Key? key}) : super(key: key);
+
+  @override
+  _MenuState createState() => _MenuState();
+}
+
+class _MenuState extends State<Menu> {
+  TextEditingController nomeController = TextEditingController();
+  var txtNome = TextEditingController();
+
 
   @override
   Widget build(BuildContext context) {
@@ -22,46 +31,37 @@ class Menu extends StatelessWidget {
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
-            FutureBuilder<User?>(
-  future: FirebaseAuth.instance.authStateChanges().first,
-  builder: (BuildContext context, AsyncSnapshot<User?> snapshot) {
-    if (snapshot.connectionState == ConnectionState.done && snapshot.hasData) {
-      final User? user = snapshot.data;
-      final String nomeUsuario = user?.displayName ?? '';
-      final String emailUsuario = user?.email ?? '';
-
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Icon(Icons.person, size: 14),
-              SizedBox(width: 4),
-              Text(
-                nomeUsuario,
-                style: TextStyle(fontSize: 12),
-              ),
-            ],
-          ),
-          SizedBox(height: 4),
-          Row(
-            children: [
-              Icon(Icons.email, size: 14),
-              SizedBox(width: 4),
-              Text(
-                emailUsuario,
-                style: TextStyle(fontSize: 12),
-              ),
-            ],
-          ),
-        ],
-      );
-    }
-    return Text('');
-  },
-),
+            FutureBuilder<String>(
+              future: LoginController().usuarioLogado(),
+              builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+                if (snapshot.connectionState == ConnectionState.done &&
+                    snapshot.hasData) {
+                  final String nomeUsuario = snapshot.data ?? '';
+                  
+                  return Column(
+                    
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          SizedBox(width: 90, height: 50,),
+                          Icon(Icons.person, size: 25),
+                          SizedBox(width: 4),
+                          Text(
+                            nomeUsuario,
+                            style: TextStyle(fontSize: 25),
+                          ),
+                        ],
+                      ),
+                      //SizedBox(height: 4),
+                    ],
+                  );
+                }
+                return Text('');
+              },
+            ),
             Container(
-              padding: EdgeInsets.fromLTRB(40, 10, 40, 10),
+              padding: EdgeInsets.fromLTRB(40, 1, 40, 10),
               child: Column(
                 children: [
                   Column(
@@ -78,40 +78,9 @@ class Menu extends StatelessWidget {
                             width: 180,
                             height: 50,
                             child: ElevatedButton(
-                              child: Text('Alterar nome'),
+                              child: Text('Configurações'),
                               onPressed: () {
-                                String novoNome = '';
-                                showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return AlertDialog(
-                                      title: Text('Alterar Nome'),
-                                      content: TextField(
-                                        decoration: InputDecoration(
-                                          hintText: 'Digite o novo nome',
-                                        ),
-                                        onChanged: (value) {
-                                          novoNome = value;
-                                        },
-                                      ),
-                                      actions: [
-                                        TextButton(
-                                          child: Text('Cancelar'),
-                                          onPressed: () {
-                                            Navigator.of(context).pop();
-                                          },
-                                        ),
-                                        TextButton(
-                                          child: Text('Salvar'),
-                                          onPressed: () {
-                                            LoginController()
-                                                .alterarNome(context, novoNome);
-                                          },
-                                        ),
-                                      ],
-                                    );
-                                  },
-                                );
+                                Navigator.pushNamed(context, 'configuracao');
                               },
                             ),
                           ),
@@ -119,26 +88,7 @@ class Menu extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(height:30),
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.lock,
-                        size: 24,
-                      ),
-                      SizedBox(width: 10),
-                      SizedBox(
-                        width: 180,
-                        height: 50,
-                        child: ElevatedButton(
-                          child: Text('Alterar senha'),
-                          onPressed: () {
-                            LoginController().alterarSenha(context);
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
+      
                   SizedBox(height: 30),
                   Row(
                     children: [
@@ -159,7 +109,11 @@ class Menu extends StatelessWidget {
                                   context: context,
                                   builder: (BuildContext context) {
                                     return AlertDialog(
-                                      title: Text('Termos de uso'),
+                                      title: Text('Aplicativo HelpTec desenvolvido por Athaide de Souza Matos e Nathan Corrêa Dias , alunos do curso de Análise e desenvolvimento de sistemas da Fatec de Ribeirão Preto, o objetivo do aplicativo é ser usado como ferramenta de estudo teórico e pratico para o aluno no decorrer do curso.',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                      )),
                                       actions: [
                                         TextButton(
                                           child: Text('Voltar'),
@@ -180,7 +134,7 @@ class Menu extends StatelessWidget {
                   ),
                   SizedBox(height: 30),
                   Row(
-                    children:[
+                    children: [
                       Icon(
                         Icons.exit_to_app,
                         size: 24,
@@ -296,7 +250,7 @@ class Menu extends StatelessWidget {
               height: 50,
               child: ElevatedButton(
                 onPressed: () {
-                  LoginController();
+                  Navigator.pushNamed(context, 'materia');
                 },
                 child: Text('Programação para Dispositivos Móveis',
                     textAlign: TextAlign.center),
@@ -356,21 +310,3 @@ class Menu extends StatelessWidget {
   }
 }
 
-Route _configuracao() {
-  return PageRouteBuilder(
-    pageBuilder: (context, animation, secondaryAnimation) =>
-        const Configuracao(),
-    transitionsBuilder: (context, animation, secondaryAnimation, child) {
-      const begin = Offset(0.0, 1.0);
-      const end = Offset.zero;
-      const curve = Curves.ease;
-
-      var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-
-      return SlideTransition(
-        position: animation.drive(tween),
-        child: child,
-      );
-    },
-  );
-}
