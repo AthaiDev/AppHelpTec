@@ -6,12 +6,12 @@ import 'package:flutter_projeto/Tela_carregamento.dart';
 import 'package:flutter_projeto/Tela_esqueceu_senha/tela_esqueceu_senha.dart';
 import 'package:flutter_projeto/configuracao.dart';
 import 'package:flutter_projeto/materiaflutter.dart';
-
 import 'firebase_options.dart';
 import 'Tela_cadastro/tela_cadastro.dart';
 import 'Tela_login/login.dart';
 import 'package:flutter_projeto/tela_menu.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_projeto/util.dart';
 
 
 Future<void> main() async {

@@ -1,25 +1,29 @@
-import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+  import 'package:firebase_auth/firebase_auth.dart';
+  import 'package:flutter/material.dart';
 
-class LoginController {
-  criarConta(context, nome, email, senha, telefone) {
+  import '../util.dart';
+
+  class LoginController {
+    // Criação de uma nova conta de usuário no Firebase Authentication
+    criarConta(context, nome, email, senha, telefone) {
     FirebaseAuth.instance
-        .createUserWithEmailAndPassword(
-      email: email,
-      password: senha,
-    )
+        .createUserWithEmailAndPassword(email: email, password: senha)
         .then((resultado) {
-      FirebaseFirestore.instance.collection('usuarios').add({
-        'uid': resultado.user!.uid,
+      // Conta criada com sucesso
+      String uid = resultado.user!.uid;
+      FirebaseFirestore.instance.collection('usuarios').doc(uid).set({
+        'uid': uid,
         'nome': nome,
         'email': email,
         'telefone': telefone,
+        
       });
 
       sucesso(context, 'Usuário criado com sucesso.');
       Navigator.pop(context);
     }).catchError((e) {
+      // Não foi possível criar a conta
       switch (e.code) {
         case 'email-already-in-use':
           erro(context, 'O email já foi cadastrado.');
@@ -28,63 +32,71 @@ class LoginController {
           erro(context, 'O formato do email é inválido.');
           break;
         default:
-          erro(context, 'ERRO: ${e.code.toString()}');
+          erro(context, 'ERRO: ${e.code}');
       }
     });
   }
 
-  login(context, email, senha) {
-    FirebaseAuth.instance
-        .signInWithEmailAndPassword(email: email, password: senha)
-        .then((resultado) {
-      sucesso(context, 'Usuário autenticado com sucesso.');
-      Navigator.pushNamed(context, 'principal');
-    }).catchError((e) {
-      switch (e.code) {
-        case 'invalid-email':
-          erro(context, 'O formato do email é inválido.');
-          break;
-        case 'user-not-found':
-          erro(context, 'Usuário não encontrado.');
-          break;
-        case 'wrong-password':
-          erro(context, 'Senha incorreta.');
-          break;
-        default:
-          erro(context, 'ERRO: ${e.code.toString()}');
-      }
-    });
-  }
 
-  esqueceuSenha(context, String email) {
-    if (email.isNotEmpty) {
-      FirebaseAuth.instance.sendPasswordResetEmail(email: email);
-      sucesso(context, 'Email enviado com sucesso.');
-    } else {
-      erro(context, 'Informe o email para recuperar a conta.');
+    // Efetuar o login de um usuário previamente cadastrado no serviço Firebase Authentication
+    login(context, email, senhaCorreta) {
+      FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: email, password: senhaCorreta)
+          .then((resultado) {
+        sucesso(context, 'Usuário autenticado com sucesso.');
+        Navigator.pushNamed(context, 'principal');
+      }).catchError((e) {
+        switch (e.code) {
+          case 'invalid-email':
+            erro(context, 'O formato do email é inválido.');
+            break;
+          case 'user-not-found':
+            erro(context, 'Usuário não encontrado.');
+            break;
+          case 'wrong-password':
+            erro(context, 'Senha incorreta.');
+            break;
+          default:
+            erro(context, 'ERRO: ${e.code.toString()}');
+        }
+      });
     }
-    Navigator.pop(context);
-  }
 
-  logout() {
-    FirebaseAuth.instance.signOut();
-  }
+    // Envia uma mensagem de email para recuperação de senha para uma conta de email válida
+    esqueceuSenha(context, String email) {
+      if (email.isNotEmpty) {
+        FirebaseAuth.instance.sendPasswordResetEmail(
+          email: email,
+        );
+        sucesso(context, 'Email enviado com sucesso.');
+      } else {
+        erro(context, 'Informe o email para recuperar a conta.');
+      }
+      Navigator.pop(context);
+    }
 
-  String idUsuario() {
-    return FirebaseAuth.instance.currentUser!.uid;
-  }
+    // Faz logout do usuário
+    logout() {
+      FirebaseAuth.instance.signOut();
+    }
 
-  Future<String> usuarioLogado() async {
-    var usuario = '';
-    await FirebaseFirestore.instance
-        .collection('usuarios')
-        .where('uid', isEqualTo: idUsuario())
-        .get()
-        .then((resultado) {
-      usuario = resultado.docs[0].data()['nome'] ?? '';
-    });
-    return usuario;
-  }
+    // Retorna o ID do usuário logado
+    idUsuario() {
+      return FirebaseAuth.instance.currentUser!.uid;
+    }
+
+    // Retorna o nome do usuário logado
+    Future<String> usuarioLogado() async {
+      var usuario = '';
+      await FirebaseFirestore.instance
+          .collection('usuarios')
+          .where('uid', isEqualTo: idUsuario())
+          .get()
+          .then((resultado) {
+        usuario = resultado.docs[0].data()['nome'] ?? '';
+      });
+      return usuario;
+    }
 
   Future<String> atualizarNomeUsuario(BuildContext context, novoNome) async {
   var nomeNovo = novoNome;
@@ -93,7 +105,7 @@ class LoginController {
   FirebaseFirestore.instance
       .collection('usuarios')
       .doc(userId)
-      .set({'nome': novoNome}, SetOptions(merge: true))
+      .set({'nome': novoNome, }, SetOptions(merge: true))
       .then((result) {
     sucesso(context, 'Nome do usuário atualizado com sucesso.');
   }).catchError((e) {
@@ -103,7 +115,7 @@ class LoginController {
   return nomeNovo;
 }
 
-  void atualizarSenha(BuildContext context) {
+void alterarSenha(BuildContext context) {
     String novaSenha = '';
 
     showDialog(
@@ -136,46 +148,6 @@ class LoginController {
                 } catch (e) {
                   erro(context, 'Erro ao alterar a senha: $e');
                 }
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
-
-  void sucesso(BuildContext context, String mensagem) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Sucesso'),
-          content: Text(mensagem),
-          actions: [
-            TextButton(
-              child: Text('Fechar'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
-
-  void erro(BuildContext context, String mensagem) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Erro'),
-          content: Text(mensagem),
-          actions: [
-            TextButton(
-              child: Text('Fechar'),
-              onPressed: () {
                 Navigator.of(context).pop();
               },
             ),

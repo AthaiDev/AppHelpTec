@@ -8,6 +8,7 @@ import '../tela_cadastro/tela_cadastro.dart';
 import 'package:flutter/material.dart';
 import '../controller/login_controller.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_projeto/util.dart';
 
 class Config extends StatefulWidget {
   const Config({Key? key}) : super(key: key);
@@ -97,7 +98,7 @@ class _ConfigState extends State<Config> {
                     fontWeight: FontWeight.normal, // adicionado
                   ),),
                   onPressed: () {
-                    LoginController().atualizarSenha(context);
+                    LoginController().alterarSenha(context);
                   },
                 ),
               ),

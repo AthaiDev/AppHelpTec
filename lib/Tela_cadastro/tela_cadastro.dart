@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../controller/login_controller.dart';
+import 'package:flutter_projeto/util.dart';
 
 class Cadastro extends StatefulWidget {
   const Cadastro({super.key});
