@@ -1,0 +1,34 @@
+2023/06/15-01:50:25.393 1a7c Reusing MANIFEST C:\Users\Adm\AppData\Local\Temp\flutter_tools.4f7279a2\flutter_tools_chrome_device.e7b947c7\Default\IndexedDB\http_localhost_60303.indexeddb.leveldb/MANIFEST-000001
+2023/06/15-01:50:25.393 1a7c Recovering log #34
+2023/06/15-01:50:25.393 1a7c Reusing old log C:\Users\Adm\AppData\Local\Temp\flutter_tools.4f7279a2\flutter_tools_chrome_device.e7b947c7\Default\IndexedDB\http_localhost_60303.indexeddb.leveldb/000034.log 
+2023/06/15-01:50:25.393 1a7c Delete type=2 #32
+2023/06/15-01:50:25.401 f1c Level-0 table #39: started
+2023/06/15-01:50:25.404 f1c Level-0 table #39: 8632 bytes OK
+2023/06/15-01:50:25.406 f1c Delete type=0 #34
+2023/06/15-01:50:25.406 1a7c Manual compaction at level-0 from '\x00\x0d\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x0e\x00\x00\x00' @ 0 : 0; will stop at '\x00\x0d\x00\x00\x05' @ 743 : 1
+2023/06/15-01:50:25.406 1a7c Compacting 1@0 + 1@1 files
+2023/06/15-01:50:25.409 1a7c Generated table #40@0: 48 keys, 2801 bytes
+2023/06/15-01:50:25.409 1a7c Compacted 1@0 + 1@1 files => 2801 bytes
+2023/06/15-01:50:25.411 1a7c compacted to: files[ 0 1 1 0 0 0 0 ]
+2023/06/15-01:50:25.411 1a7c Delete type=2 #39
+2023/06/15-01:50:25.411 1a7c Manual compaction at level-0 from '\x00\x0d\x00\x00\x05' @ 743 : 1 .. '\x00\x0e\x00\x00\x00' @ 0 : 0; will stop at (end)
+2023/06/15-02:01:02.940 2d00 Level-0 table #42: started
+2023/06/15-02:01:02.944 2d00 Level-0 table #42: 2745 bytes OK
+2023/06/15-02:01:02.945 2d00 Delete type=2 #36
+2023/06/15-02:01:02.946 2d00 Delete type=0 #38
+2023/06/15-02:01:02.946 447c Manual compaction at level-0 from (begin) .. (end); will stop at '\x00\x02\x01\x02\x01C\x00f\x00i\x00r\x00e\x00b\x00a\x00s\x00e\x00:\x00a\x00u\x00t\x00h\x00U\x00s\x00e\x00r\x00:\x00A\x00I\x00z\x00a\x00S\x00y\x00D\x00y\x00N\x006\x00E\x00M\x00l\x00I\x00h\x00G\x00l\x00j\x00i\x00c\x00E\x00O\x00g\x00l\x00l\x00z\x00n\x00f\x006\x00V\x00i\x00C\x00f\x00S\x00M\x00o\x008\x009\x00w\x00:\x00[\x00D\x00E\x00F\x00A\x00U\x00L\x00T\x00]' @ 778 : 1
+2023/06/15-02:01:02.946 447c Compacting 1@0 + 1@1 files
+2023/06/15-02:01:02.949 447c Generated table #43@0: 49 keys, 2752 bytes
+2023/06/15-02:01:02.949 447c Compacted 1@0 + 1@1 files => 2752 bytes
+2023/06/15-02:01:02.951 447c compacted to: files[ 0 1 1 0 0 0 0 ]
+2023/06/15-02:01:02.951 447c Delete type=2 #40
+2023/06/15-02:01:02.951 447c Delete type=2 #42
+2023/06/15-02:01:02.951 447c Manual compaction at level-0 from '\x00\x02\x01\x02\x01C\x00f\x00i\x00r\x00e\x00b\x00a\x00s\x00e\x00:\x00a\x00u\x00t\x00h\x00U\x00s\x00e\x00r\x00:\x00A\x00I\x00z\x00a\x00S\x00y\x00D\x00y\x00N\x006\x00E\x00M\x00l\x00I\x00h\x00G\x00l\x00j\x00i\x00c\x00E\x00O\x00g\x00l\x00l\x00z\x00n\x00f\x006\x00V\x00i\x00C\x00f\x00S\x00M\x00o\x008\x009\x00w\x00:\x00[\x00D\x00E\x00F\x00A\x00U\x00L\x00T\x00]' @ 778 : 1 .. (end); will stop at (end)
+2023/06/15-02:01:02.952 447c Manual compaction at level-1 from (begin) .. (end); will stop at '\x00\x02\x01\x02\x01C\x00f\x00i\x00r\x00e\x00b\x00a\x00s\x00e\x00:\x00a\x00u\x00t\x00h\x00U\x00s\x00e\x00r\x00:\x00A\x00I\x00z\x00a\x00S\x00y\x00D\x00y\x00N\x006\x00E\x00M\x00l\x00I\x00h\x00G\x00l\x00j\x00i\x00c\x00E\x00O\x00g\x00l\x00l\x00z\x00n\x00f\x006\x00V\x00i\x00C\x00f\x00S\x00M\x00o\x008\x009\x00w\x00:\x00[\x00D\x00E\x00F\x00A\x00U\x00L\x00T\x00]' @ 778 : 1
+2023/06/15-02:01:02.952 447c Compacting 1@1 + 1@2 files
+2023/06/15-02:01:02.954 447c Generated table #44@1: 35 keys, 2749 bytes
+2023/06/15-02:01:02.954 447c Compacted 1@1 + 1@2 files => 2749 bytes
+2023/06/15-02:01:02.956 447c compacted to: files[ 0 0 1 0 0 0 0 ]
+2023/06/15-02:01:02.957 447c Delete type=2 #21
+2023/06/15-02:01:02.957 447c Delete type=2 #43
+2023/06/15-02:01:02.957 447c Manual compaction at level-1 from '\x00\x02\x01\x02\x01C\x00f\x00i\x00r\x00e\x00b\x00a\x00s\x00e\x00:\x00a\x00u\x00t\x00h\x00U\x00s\x00e\x00r\x00:\x00A\x00I\x00z\x00a\x00S\x00y\x00D\x00y\x00N\x006\x00E\x00M\x00l\x00I\x00h\x00G\x00l\x00j\x00i\x00c\x00E\x00O\x00g\x00l\x00l\x00z\x00n\x00f\x006\x00V\x00i\x00C\x00f\x00S\x00M\x00o\x008\x009\x00w\x00:\x00[\x00D\x00E\x00F\x00A\x00U\x00L\x00T\x00]' @ 778 : 1 .. (end); will stop at (end)

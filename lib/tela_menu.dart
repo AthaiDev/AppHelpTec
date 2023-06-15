@@ -26,7 +26,16 @@ class _MenuState extends State<Menu> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Dashboard', textAlign: TextAlign.center),
+      title: Text('Menu', textAlign: TextAlign.center),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.add),
+            onPressed: () {
+              // Navegar para a tela de adicionar lembrete
+              Navigator.pushNamed(context, 'adicionar_lembrete');
+            },
+          ),
+        ],
       ),
       drawer: Drawer(
         child: ListView(
