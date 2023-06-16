@@ -1,20 +1,13 @@
-2023/06/15-17:33:47.227 416c Reusing MANIFEST C:\Users\athai\AppData\Local\Temp\flutter_tools.83489e7\flutter_tools_chrome_device.43ef8462\Default\Local Storage\leveldb/MANIFEST-000001
-2023/06/15-17:33:47.236 416c Recovering log #11
-2023/06/15-17:33:47.242 416c Reusing old log C:\Users\athai\AppData\Local\Temp\flutter_tools.83489e7\flutter_tools_chrome_device.43ef8462\Default\Local Storage\leveldb/000011.log 
-2023/06/15-17:33:47.246 416c Delete type=0 #3
-2023/06/15-17:33:47.246 416c Delete type=2 #5
-2023/06/15-17:33:47.246 416c Delete type=0 #6
-2023/06/15-17:33:47.246 416c Delete type=2 #7
-2023/06/15-17:33:47.246 416c Delete type=2 #9
-2023/06/15-17:33:47.246 416c Delete type=0 #10
-2023/06/15-17:46:54.498 232c Level-0 table #15: started
-2023/06/15-17:46:54.502 232c Level-0 table #15: 8163 bytes OK
-2023/06/15-17:46:54.504 232c Delete type=0 #11
-2023/06/15-17:46:54.505 232c Compacting 4@0 + 0@1 files
-2023/06/15-17:46:54.508 232c Generated table #16@0: 16 keys, 6149 bytes
-2023/06/15-17:46:54.508 232c Compacted 4@0 + 0@1 files => 6149 bytes
-2023/06/15-17:46:54.510 232c compacted to: files[ 0 1 0 0 0 0 0 ]
-2023/06/15-17:46:54.511 232c Delete type=2 #3
-2023/06/15-17:46:54.511 232c Delete type=2 #4
-2023/06/15-17:46:54.511 232c Delete type=2 #12
-2023/06/15-17:46:54.511 232c Delete type=2 #15
+2023/06/15-19:16:19.366 4e94 Reusing MANIFEST C:\Users\athai\AppData\Local\Temp\flutter_tools.87519f57\flutter_tools_chrome_device.b41814f7\Default\Local Storage\leveldb/MANIFEST-000001
+2023/06/15-19:16:19.383 4e94 Recovering log #14
+2023/06/15-19:16:19.393 4e94 Reusing old log C:\Users\athai\AppData\Local\Temp\flutter_tools.87519f57\flutter_tools_chrome_device.b41814f7\Default\Local Storage\leveldb/000014.log 
+2023/06/15-19:16:19.395 4e94 Delete type=2 #3
+2023/06/15-19:16:19.395 4e94 Delete type=0 #3
+2023/06/15-19:16:19.395 4e94 Delete type=2 #4
+2023/06/15-19:16:19.395 4e94 Delete type=2 #5
+2023/06/15-19:16:19.395 4e94 Delete type=0 #6
+2023/06/15-19:16:19.395 4e94 Delete type=2 #7
+2023/06/15-19:16:19.395 4e94 Delete type=2 #9
+2023/06/15-19:16:19.395 4e94 Delete type=0 #10
+2023/06/15-19:16:19.396 4e94 Delete type=0 #11
+2023/06/15-19:16:19.396 4e94 Delete type=2 #12

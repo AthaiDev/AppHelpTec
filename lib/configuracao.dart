@@ -64,17 +64,20 @@ class _ConfigState extends State<Config> {
                             ),
                             TextButton(
                               child: Text('Salvar'),
-                              onPressed: () async {
-                                String novoNome = nomeController.text.trim();
-                                if (novoNome.isNotEmpty) {
+                              onPressed: ()  {
+                                String novoNome = nomeController.text;
+                               
                                   setState(() {
-                                    txtNome.text = novoNome;
+                                if (novoNome.isNotEmpty) {  
+                                      LoginController()
+                                      .atualizarNomeUsuario(context, novoNome);
+                                  
+
+                                }
                                   });
 
-                                  await LoginController()
-                                      .atualizarNomeUsuario(context, novoNome);
-                                  Navigator.of(context).pop();
-                                }
+                                 
+                                
                               },
                             ),
                           ],

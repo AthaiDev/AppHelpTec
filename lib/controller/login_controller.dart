@@ -57,7 +57,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
             erro(context, 'Senha incorreta.');
             break;
           default:
-            erro(context, 'ERRO: ${e.code.toString()}');
+            erro(context, 'Usuário ou senha incorreta.');
         }
       });
     }
@@ -105,11 +105,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
   FirebaseFirestore.instance
       .collection('usuarios')
       .doc(userId)
-      .set({'nome': novoNome, }, SetOptions(merge: true))
+      .set({'nome': novoNome }, SetOptions(merge: true))
       .then((result) {
-    sucesso(context, 'Nome do usuário atualizado com sucesso.');
+        sucesso(context, 'Nome do usuário atualizado com sucesso.');
+        Navigator.of(context).popAndPushNamed('principal');
   }).catchError((e) {
     erro(context, 'Erro na atualização: ${e.toString()}');
+    Navigator.of(context).pop();
   });
 
   return nomeNovo;

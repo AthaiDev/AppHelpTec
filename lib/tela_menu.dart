@@ -44,29 +44,21 @@ class _MenuState extends State<Menu> {
           children: [
             FutureBuilder<String>(
               future: LoginController().usuarioLogado(),
-              builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
-                if (snapshot.connectionState == ConnectionState.done &&
-                    snapshot.hasData) {
-                  final String nomeUsuario = snapshot.data ?? '';
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.done) {
                   
-                  return Column(
-                    
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
+                  return 
                       Row(
                         children: [
                           SizedBox(width: 90, height: 50,),
                           Icon(Icons.person, size: 25),
                           SizedBox(width: 4),
                           Text(
-                            nomeUsuario,
+                            snapshot.data!.toString(),
                             style: TextStyle(fontSize: 25),
                           ),
                         ],
-                      ),
-                      //SizedBox(height: 4),
-                    ],
-                  );
+                      );
                 }
                 return Text('');
               },
@@ -91,7 +83,7 @@ class _MenuState extends State<Menu> {
                             child: ElevatedButton(
                               child: Text('Configurações'),
                               onPressed: () {
-                                Navigator.pushNamed(context, 'configuracao');
+                                Navigator.of(context).pushNamed('configuracao');
                               },
                             ),
                           ),
@@ -115,6 +107,49 @@ class _MenuState extends State<Menu> {
                             height: 50,
                             child: ElevatedButton(
                               child: Text('Termos de uso'),
+                              onPressed: () {
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: Text('Este aplicativo, e todo o conteúdo do mesmo é  oferecido por Athaide e Nathan, neste termo representado apenas por eles, que regulamenta todos os direitos e obrigações com todos que acessam o app, denominado neste termo como “usuário", reguardado todos os direitos previstos na legislação, trazem as cláusulas abaixo como requisito para acesso e visita do mesmo, situado no endereço helptec',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                      )),
+                                      actions: [
+                                        TextButton(
+                                          child: Text('Voltar'),
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 30),
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.document_scanner_outlined,
+                        size: 24,
+                      ),
+                      SizedBox(width: 10),
+                      Column(
+                        children: [
+                          SizedBox(
+                            width: 180,
+                            height: 50,
+                            child: ElevatedButton(
+                              child: Text('Sobre'),
                               onPressed: () {
                                 showDialog(
                                   context: context,
